@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mi Aplicación Django</title>
+    <!-- Puedes agregar aquí tus hojas de estilo CSS y otros elementos del head -->
+  </head>
+  <body>
+    <header>
+      <h1>Bienvenido a Mi Aplicación Django</h1>
+      <nav>
+        <!-- Enlaces de navegación -->
+        <ul>
+          <li><a href="{% url 'lista_ventas' %}">Ventas</a></li>
+          <li><a href="{% url 'lista_clientes' %}">Clientes</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}
+      <!-- El contenido de cada página específica irá aquí -->
+      {% endblock %}
+    </main>
+
+    <footer>
+      <p>Derechos reservados &copy; <span id="year"></span></p>
+    </footer>
+
+    <!-- JavaScript para mostrar el año actual -->
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

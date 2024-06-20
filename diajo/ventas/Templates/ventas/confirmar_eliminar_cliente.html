@@ -1,0 +1,11 @@
+<!-- ventas/templates/ventas/confirmar_eliminar_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>¿Estás seguro de que deseas eliminar el cliente "{{ cliente.RAZON_SOCIAL }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+  </form>
+  <a href="{% url 'detalle_cliente' pk=cliente.pk %}">Cancelar</a>
+{% endblock %}

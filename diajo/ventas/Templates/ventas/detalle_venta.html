@@ -1,0 +1,20 @@
+<!-- templates/ventas/detalle_venta.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Detalle de Venta: {{ venta.IT }}</h2>
+  <p><strong>Código del Vendedor:</strong> {{ venta.COD }}</p>
+  <p><strong>Cliente:</strong> {{ venta.cliente.RAZON_SOCIAL }} ({{ venta.cliente.RUC }})</p>
+  <p><strong>Número de Documento:</strong> {{ venta.DCTO_N }}</p>
+  <p>
+    <strong>Importe:</strong>
+    {% if venta.MONEDA == 'S/' %} S/ {{ venta.IMPORTE }} {% else %} $ {{ venta.IMPORTE }} {% endif %}
+  </p>
+  <p><strong>Plazo de Pago:</strong> {{ venta.PLAZO }} días</p>
+  <p><strong>Fecha de Emisión:</strong> {{ venta.FECHA_EMISION }}</p>
+  <p><strong>Fecha de Vencimiento:</strong> {{ venta.FECHA_VENCIMIENTO }}</p>
+  <p><strong>Fecha de Recepción:</strong> {{ venta.RECEP_FT }}</p>
+  <p><strong>Estado:</strong> {{ venta.ESTADO }}</p>
+  <a href="{% url 'venta_editar' pk=venta.pk %}">Editar Venta</a> |
+  <a href="{% url 'venta_eliminar' pk=venta.pk %}">Eliminar Venta</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- templates/ventas/lista_ventas.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Ventas</h2>
+  <a href="{% url 'venta_crear' %}">Crear Nueva Venta</a>
+  <ul>
+    {% for venta in ventas %}
+      <li>
+        <a href="{% url 'venta_detalle' pk=venta.pk %}">Venta {{ venta.IT }}</a> - {{ venta.cliente.RAZON_SOCIAL }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+<!-- ventas/templates/ventas/venta_confirm_delete.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>¿Estás seguro de que deseas eliminar la venta "{{ venta }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+  </form>
+  <a href="{% url 'venta_detalle' pk=venta.pk %}">Cancelar</a>
+{% endblock %}

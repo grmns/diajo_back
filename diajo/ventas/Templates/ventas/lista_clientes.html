@@ -1,0 +1,14 @@
+<!-- ventas/templates/ventas/lista_clientes.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Clientes</h2>
+  <a href="{% url 'crear_cliente' %}">Crear Nuevo Cliente</a>
+  <ul>
+    {% for cliente in clientes %}
+      <li>
+        <a href="{% url 'detalle_cliente' pk=cliente.pk %}">{{ cliente.RAZON_SOCIAL }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

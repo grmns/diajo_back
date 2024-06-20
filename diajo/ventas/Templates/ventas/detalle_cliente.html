@@ -1,0 +1,9 @@
+<!-- ventas/templates/ventas/detalle_cliente.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Detalle del Cliente: {{ cliente.RAZON_SOCIAL }}</h2>
+  <p><strong>RUC:</strong> {{ cliente.RUC }}</p>
+  <a href="{% url 'editar_cliente' pk=cliente.pk %}">Editar Cliente</a> |
+  <a href="{% url 'eliminar_cliente' pk=cliente.pk %}">Eliminar Cliente</a>
+{% endblock %}

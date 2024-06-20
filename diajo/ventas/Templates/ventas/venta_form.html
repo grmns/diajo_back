@@ -1,0 +1,50 @@
+<!-- ventas/templates/ventas/venta_form.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Editar Venta{% else %}Nueva Venta{% endif %}</h2>
+  <form method="post" id="venta-form">
+    {% csrf_token %} 
+    <!-- Campo para ingresar RUC -->
+    <label for="ruc">RUC:</label>
+    <input type="text" id="ruc" name="ruc">
+
+    <!-- Campos del formulario -->
+    {% for field in form %}
+      <!-- Verifica si el campo es de fecha -->
+      {% if field.name == "FECHA_EMISION" or field.name == "FECHA_VENCIMIENTO" or field.name == "RECEP_FT" %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <input type="date" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|date:"Y-m-d" }}">
+      {% else %}
+        <div>
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <button type="submit">Guardar</button>
+  </form>
+
+  <!-- JavaScript para autocompletar -->
+  <script>
+    document.getElementById('ruc').addEventListener('input', function() {
+        var ruc = this.value;
+        if (ruc.length === 11) {
+            fetch('/obtener_cliente/' + ruc)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.error) {
+                        // Encuentra el cliente en el dropdown y selecciónalo
+                        var clienteSelect = document.querySelector('[name="cliente"]');
+                        for (var i = 0; i < clienteSelect.options.length; i++) {
+                            if (clienteSelect.options[i].text.includes(ruc)) {
+                                clienteSelect.selectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                });
+        }
+    });
+  </script>
+{% endblock %}
